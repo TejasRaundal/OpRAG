@@ -26,7 +26,7 @@
 ## Tech Stack
 
 - **Frontend:** Tauri (desktop UI)
-- **Backend API:** FastAPI
+- **Backend API:** FastAPI (Using LanChain code for Text Splitters, Prompt Templates, Document Loaders, Retrieval ALgos, Agents)
 - **Model runtime / Embeddings:** ONNX (local model inference for embeddings)
 - **Vector database:** Qdrant (on‑premise vector search)
 - **Relational DB:** PostgreSQL (for metadata, users, and configs)
