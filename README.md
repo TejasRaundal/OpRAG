@@ -23,3 +23,10 @@
 - Configurable knowledge bases for industry workflows
 - Simple UI for business users and administrators
 
+## Tech Stack
+
+- **Frontend:** Tauri (desktop UI)
+- **Backend API:** FastAPI
+- **Model runtime / Embeddings:** ONNX (local model inference for embeddings)
+- **Vector database:** Qdrant (on‑premise vector search)
+- **Relational DB:** PostgreSQL (for metadata, users, and configs)
