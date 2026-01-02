@@ -25,8 +25,23 @@
 
 ## Tech Stack
 
-- **Frontend:** Tauri (desktop UI)
-- **Backend API:** FastAPI (Using LanChain code for Text Splitters, Prompt Templates, Document Loaders, Retrieval ALgos, Agents)
-- **Model runtime / Embeddings:** ONNX (local model inference for embeddings)
+- **Frontend:** Tauri (desktop UI) Svelte + Vite + TypeScript
+- **Backend API:** FastAPI (Using LangChain code for Text Splitters, Prompt Templates, Document Loaders, Retrieval ALgos, Agents)
+- **Model runtime / Embeddings:** ONNX (local model inference for embeddings) all-MiniLM-L6-v2
 - **Vector database:** Qdrant (on‑premise vector search)
 - **Relational DB:** PostgreSQL (for metadata, users, and configs)
+- **Software Design Pattern:** Hexagonal Architecture (Ports and Adapters)
+
+## Quick Start — UI (development)
+
+**Prerequisites:** Node.js + npm, Rust & cargo, Python (for mock API). For full stack testing also have Qdrant and PostgreSQL running locally.
+
+1. Install JS deps: `npm install`
+2. Start mock backend (dev): `uvicorn mock.mock_api:app --reload --port 8000`
+3. Start frontend dev server: `npm run dev` (visit http://localhost:5173)
+4. To run full desktop app during development: `npm run tauri:dev`
+5. To build a production binary: `npm run tauri:build`
+
+**Notes:**
+- Follow the Hexagonal Architecture: keep adapters (API calls) in `src/lib` (ports/adapters), UI components in `src/components`, and domain logic in `src/services`.
+- Use TypeScript and small, testable functions; persist user config via Tauri APIs when ready.
