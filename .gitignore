@@ -1,0 +1,59 @@
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+public/build/
+.cache/
+
+# Vite
+.vite/
+
+# Tauri / Rust
+src-tauri/target/
+target/
+/.cargo/
+
+# Environment
+.env
+.env.*
+.env.local
+
+# Logs
+npm-debug.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Python
+__pycache__/
+*.py[cod]
+*.pytest_cache/
+venv/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Coverage
+coverage/
+coverage-final.json
+
+# Misc
+*.tgz
+
+# Ignore lockfile for alternative package managers
+pnpm-lock.yaml
+yarn.lock
