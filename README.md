@@ -45,3 +45,4 @@
 **Notes:**
 - Follow the Hexagonal Architecture: keep adapters (API calls) in `src/lib` (ports/adapters), UI components in `src/components`, and domain logic in `src/services`.
 - Use TypeScript and small, testable functions; persist user config via Tauri APIs when ready.
+- UI features professional styling with Tailwind CSS, Lucide icons, and enterprise-friendly color scheme.

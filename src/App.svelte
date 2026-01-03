@@ -21,12 +21,34 @@
     <Sidebar {route} on:navigate={(e) => navigate(e.detail)} />
   </aside>
   <main class="main">
-    {#if route === 'chat'}
-      <Chat />
-    {:else if route === 'ingest'}
-      <Ingestion />
-    {:else}
-      <Settings />
-    {/if}
+    <div class="header">
+      <h2 class="text-xl font-bold text-gray-900">
+        {#if route === 'chat'}
+          💬 Chat with your Documents
+        {:else if route === 'ingest'}
+          📁 Ingest Documents
+        {:else}
+          ⚙️ Configuration
+        {/if}
+      </h2>
+      <div class="text-sm text-gray-500">
+        {#if route === 'chat'}
+          Ask questions about your indexed documents
+        {:else if route === 'ingest'}
+          Upload and index your documents
+        {:else}
+          Manage connections and settings
+        {/if}
+      </div>
+    </div>
+    <div class="content">
+      {#if route === 'chat'}
+        <Chat />
+      {:else if route === 'ingest'}
+        <Ingestion />
+      {:else}
+        <Settings />
+      {/if}
+    </div>
   </main>
 </div>

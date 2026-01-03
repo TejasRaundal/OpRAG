@@ -8,25 +8,35 @@
     // in prod use Tauri filesystem or secure storage
     alert('Saved (mock)')
   }
+
+  async function testConnection(type: 'qdrant' | 'postgres') {
+    // mock test
+    alert(`${type} connection test: OK (mock)`)
+  }
 </script>
 
 <div class="card">
-  <h3>Settings</h3>
-  <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-    <label>Qdrant Host
-      <input bind:value={qdrantHost} style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)" />
-    </label>
+  <h3>⚙️ Settings</h3>
+  <div style="margin-top:16px;display:flex;flex-direction:column;gap:16px">
+    <div>
+      <label for="qdrantHost" style="display:block;margin-bottom:4px;font-weight:500">Qdrant Host</label>
+      <input id="qdrantHost" class="input" bind:value={qdrantHost} style="width:100%" />
+      <button class="btn" style="margin-top:8px" on:click={() => testConnection('qdrant')}>Test Connection</button>
+    </div>
 
-    <label>PostgreSQL Connection
-      <input bind:value={pgConn} style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)" />
-    </label>
+    <div>
+      <label for="pgConn" style="display:block;margin-bottom:4px;font-weight:500">PostgreSQL Connection</label>
+      <input id="pgConn" class="input" bind:value={pgConn} style="width:100%" />
+      <button class="btn" style="margin-top:8px" on:click={() => testConnection('postgres')}>Test Connection</button>
+    </div>
 
-    <label>ONNX Model Path
-      <input bind:value={onnxPath} style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)" />
-    </label>
+    <div>
+      <label for="onnxPath" style="display:block;margin-bottom:4px;font-weight:500">ONNX Model Path</label>
+      <input id="onnxPath" class="input" bind:value={onnxPath} style="width:100%" />
+    </div>
 
     <div style="margin-top:8px">
-      <button on:click={save} style="padding:8px 12px;border-radius:6px;background:var(--accent);border:none;color:#052018">Save</button>
+      <button class="btn" on:click={save}>💾 Save Settings</button>
     </div>
   </div>
 </div>

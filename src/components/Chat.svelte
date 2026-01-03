@@ -1,30 +1,46 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
-  let messages = [{id:1,role:'system',text:'Welcome to OpRAG — ask something about your documents.'}]
+  import { MessageSquare, Send } from 'lucide-svelte'
+  let messages: {id: number, role: 'user' | 'assistant', text: string, timestamp: string}[] = [
+    {id:1, role:'assistant', text:'Welcome to OpRAG Chat. Ask me anything about your indexed documents.', timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+  ]
   let input = ''
 
   function send() {
     if(!input.trim()) return
-    messages = [...messages, {id: Date.now(), role: 'user', text: input}]
-    // placeholder for calling backend
-    messages = [...messages, {id: Date.now()+1, role: 'assistant', text: '(mock) This is an example response. Integrate search + generator to get real answers.'}]
+    const now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+    messages = [...messages, {id: Date.now(), role: 'user', text: input, timestamp: now}]
+    setTimeout(() => {
+      messages = [...messages, {id: Date.now()+1, role: 'assistant', text: 'This is a mock response. Connect to your backend to get real answers from your documents.', timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}]
+    }, 800)
     input = ''
   }
 </script>
 
-<div class="card">
-  <h3>Chat / RAG</h3>
-  <div style="height:60vh;overflow:auto;border:1px solid rgba(255,255,255,0.02);padding:12px;margin-top:8px;border-radius:6px">
+<div class="chat-container">
+  <div class="messages-area">
     {#each messages as m}
-      <div style="margin-bottom:10px">
-        <strong style="color:var(--accent)">{m.role}</strong> <span style="color:var(--muted);font-size:13px"> — {m.id}</span>
-        <div style="margin-top:6px">{m.text}</div>
+      <div class="message {m.role}">
+        <div class="message-avatar">
+          {m.role === 'user' ? '👤' : '🤖'}
+        </div>
+        <div class="message-content">
+          <div class="message-bubble">{m.text}</div>
+          <div class="message-meta">{m.timestamp}</div>
+        </div>
       </div>
     {/each}
   </div>
 
-  <div style="margin-top:10px;display:flex;gap:8px">
-    <input placeholder="Ask about your data..." bind:value={input} style="flex:1;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)" />
-    <button on:click={send} style="padding:8px 12px;border-radius:6px;background:var(--accent);border:none;color:#052018">Send</button>
+  <div style="padding: 20px; background: var(--panel); border-top: 1px solid var(--card-border); display: flex; gap: 12px;">
+    <input 
+      class="input" 
+      placeholder="Ask a question about your documents..." 
+      bind:value={input} 
+      on:keydown={(e) => e.key === 'Enter' && send()}
+      style="flex: 1;"
+    />
+    <button class="btn" on:click={send} disabled={!input.trim()}>
+      <Send size={18} />
+    </button>
   </div>
 </div>
